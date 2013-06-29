@@ -11,28 +11,23 @@ endif
 
 
 
-all:libmincrypt.a mkbootimg$(EXE) unpackbootimg$(EXE)
-
-libmincrypt.a:
-	make -C libmincrypt
+all: mkbootimg$(EXE) unpackbootimg$(EXE)
 
 mkbootimg$(EXE):mkbootimg.o
-	$(CC) -o $@ $^ -L. -lcrypto -static
+	$(CC) -o $@ $^ -L. -lcrypto
 
 mkbootimg.o:mkbootimg.c
 	$(CC) -o $@ -c $< -I.
 
 
 unpackbootimg$(EXE):unpackbootimg.o
-	$(CC) -o $@ $^ -lcrypto -static
+	$(CC) -o $@ $^ -lcrypto
 
 unpackbootimg.o:unpackbootimg.c
 	$(CC) -o $@ -c $< 
 
 clean:
 	$(RM) mkbootimg mkbootimg.o unpackbootimg unpackbootimg.o      mkbootimg.exe    unpackbootimg.exe 
-	$(RM) libmincrypt.a Makefile.~
-	make -C libmincrypt clean
 
 
 		
